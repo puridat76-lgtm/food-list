@@ -8,6 +8,9 @@ const itim = Itim({
 
 export const metadata = {
   title: "wisawa-salmon",
+  icons: {
+    icon: "/favicon.ico",
+  },
   description: "menu view-only",
 };
 
