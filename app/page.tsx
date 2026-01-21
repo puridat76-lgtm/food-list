@@ -154,7 +154,7 @@ export default function MenuPage() {
                     borderRadius: 999,
                     border: "2px solid #000",
                     background: active ? "#ffc5a2" : "#fff",
-                    fontWeight: 400,
+                    fontWeight: 900,
                     cursor: "pointer",
                   }}
                 >

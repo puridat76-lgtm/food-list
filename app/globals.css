@@ -1,21 +1,11 @@
 @import "tailwindcss";
 
-/* ===== Base Reset ===== */
-html,
-body {
-  height: 100%;
+/* ✅ บังคับทั้งเว็บใช้ Itim */
+html, body {
+  font-family: inherit;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-}
-
-/* ===== ซ่อน scrollbar ของแถบหมวดหมู่ ===== */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+/* ✅ ปุ่ม/ฟอร์ม บางทีไม่ยอมใช้ font เดียวกัน ต้องสั่งเพิ่ม */
+button, input, textarea, select {
+  font-family: inherit;
 }
