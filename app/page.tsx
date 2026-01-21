@@ -17,28 +17,14 @@ export default function MenuPage() {
   const [activeCat, setActiveCat] = useState<Cat>("ทั้งหมด");
   const [preview, setPreview] = useState<{ src: string; title: string } | null>(null);
 
-  // ✅ NEW: Search
-  const [search, setSearch] = useState("");
-
   const filtered = useMemo(() => {
-    // 1) filter by category
-    let list = activeCat === "ทั้งหมด" ? MENU : MENU.filter((m) => m.category === activeCat);
-
-    // 2) filter by search keyword (ชื่อเมนู / หมวดหมู่)
-    const q = search.trim().toLowerCase();
-    if (q) {
-      list = list.filter((m) => {
-        const name = String(m.name || "").toLowerCase();
-        const cat = String(m.category || "").toLowerCase();
-        return name.includes(q) || cat.includes(q);
-      });
-    }
-
-    return list;
-  }, [activeCat, search]);
+    if (activeCat === "ทั้งหมด") return MENU;
+    return MENU.filter((m) => m.category === activeCat);
+  }, [activeCat]);
 
   return (
     <main
+      className="page"
       style={{
         minHeight: "100vh",
         backgroundColor: PAGE_BG,
@@ -47,115 +33,121 @@ export default function MenuPage() {
         fontFamily: "inherit",
       }}
     >
-      <div style={{ maxWidth: 1150, margin: "0 auto" }}>
-        {/* ===== HEADER (Title center + Search top-right) ===== */}
-        <div
-          style={{
-            marginTop: 8,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 12,
-            flexWrap: "wrap",
-          }}
-        >
-          {/* left spacer (ช่วยให้หัวข้ออยู่กลาง) */}
-          <div style={{ width: 260 }} />
+      {/* ✅ CSS สำหรับ Mobile Responsive + Tabs เลื่อนเนียน */}
+      <style>{`
+        .wrap {
+          width: 100%;
+          max-width: 1150px;
+          margin: 0 auto;
+        }
 
-          {/* title (center) */}
-          <div style={{ flex: 1, textAlign: "center", minWidth: 220 }}>
-            <div style={{ fontSize: 34, fontWeight: 900, letterSpacing: 1 }}>
-              🐟 รายการอาหาร 🐟
-            </div>
-          </div>
+        /* ✅ TAB BAR */
+        .tabsRow {
+          display: flex;
+          gap: 10px;
+          overflow-x: auto;
+          padding: 8px 8px;
+          max-width: 100%;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+        }
+        .tabsRow::-webkit-scrollbar { display: none; }
 
-          {/* search (top-right) */}
-          <div
-            style={{
-              width: 260,
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-                width: "100%",
-                maxWidth: 260,
-                padding: "8px 12px",
-                borderRadius: 999,
-                border: "1.5px solid rgba(0,0,0,0.25)",
-                background: "rgba(255,255,255,0.55)",
-                boxShadow: "0 2px 0 rgba(0,0,0,0.08)",
-              }}
-            >
-              <span style={{ opacity: 0.55 }}>🔎</span>
+        .tabBtn {
+          flex: 0 0 auto;       /* ✅ กันปุ่มยืดจนตัด */
+          min-width: 92px;
+          padding: 10px 18px;
+          border-radius: 999px;
+          border: 2px solid #000;
+          background: #fff;
+          font-weight: 900;
+          cursor: pointer;
+          white-space: nowrap;  /* ✅ กันคำตัดบรรทัด */
+        }
 
-              <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="ค้นหาเมนู..."
-                style={{
-                  width: "100%",
-                  border: "none",
-                  outline: "none",
-                  background: "transparent",
-                  fontSize: 14,
-                  color: "#000",
-                  opacity: 0.85,
-                }}
-              />
+        /* ✅ Grid */
+        .grid {
+          margin-top: 24px;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 26px;
+        }
 
-              {/* ปุ่มล้างข้อความ (จางๆ ไม่เด่น) */}
-              {search.trim() !== "" && (
-                <button
-                  onClick={() => setSearch("")}
-                  style={{
-                    border: "none",
-                    background: "transparent",
-                    cursor: "pointer",
-                    opacity: 0.45,
-                    fontSize: 16,
-                    lineHeight: 1,
-                  }}
-                  aria-label="ล้างคำค้นหา"
-                  title="ล้าง"
-                >
-                  ✕
-                </button>
-              )}
-            </div>
+        .card {
+          width: 100%;
+          box-sizing: border-box;
+        }
+
+        .imgBox { height: 320px; }
+
+        /* ✅ มือถือ: ให้หน้า “พอดีแบบรูป” */
+        @media (max-width: 480px) {
+          .page { padding: 12px !important; }
+
+          /* ✅ ตัวนี้สำคัญสุด: ล็อคความกว้างให้เหมือนภาพ */
+          .wrap {
+            max-width: 400px !important; /* ✅ ปรับเลขนี้ได้เอง 380/400/420 */
+            width: 100% !important;
+            margin: 0 auto !important;
+          }
+
+          .grid {
+            grid-template-columns: 1fr !important;
+            gap: 18px !important;
+          }
+
+          .title {
+            font-size: 26px !important;
+          }
+
+          .tabsRow {
+            justify-content: flex-start !important; /* ✅ มือถือให้เลื่อนแท็บ */
+            padding: 8px 4px !important;
+          }
+
+          .tabBtn {
+            min-width: 86px !important;
+            padding: 9px 14px !important;
+            font-size: 14px !important;
+            font-weight: 900 !important;
+          }
+
+          .imgBox {
+            height: 260px !important;
+          }
+
+          .cardOuter {
+            border-width: 4px !important;
+            border-radius: 30px !important;
+          }
+
+          .imgFrame {
+            border-width: 4px !important;
+            border-radius: 22px !important;
+          }
+        }
+      `}</style>
+
+      <div className="wrap">
+        {/* ===== HEADER ===== */}
+        <div style={{ textAlign: "center", marginTop: 8 }}>
+          <div className="title" style={{ fontSize: 34, fontWeight: 900, letterSpacing: 1 }}>
+            🐟 รายการอาหาร 🐟
           </div>
         </div>
 
         {/* ===== TABS ===== */}
         <div style={{ marginTop: 18, display: "flex", justifyContent: "center" }}>
-          <div
-            style={{
-              display: "flex",
-              gap: 10,
-              overflowX: "auto",
-              padding: "8px 8px",
-              maxWidth: "100%",
-              scrollbarWidth: "none",
-            }}
-          >
+          <div className="tabsRow">
             {CATS.map((t) => {
               const active = activeCat === t;
               return (
                 <button
                   key={t}
                   onClick={() => setActiveCat(t)}
+                  className="tabBtn"
                   style={{
-                    minWidth: 92,
-                    padding: "10px 18px",
-                    borderRadius: 999,
-                    border: "2px solid #000",
                     background: active ? "#ffc5a2" : "#fff",
-                    fontWeight: 900,
-                    cursor: "pointer",
                   }}
                 >
                   {t}
@@ -165,32 +157,12 @@ export default function MenuPage() {
           </div>
         </div>
 
-        {/* ✅ ถ้าค้นหาแล้วไม่เจอ */}
-        {filtered.length === 0 && (
-          <div
-            style={{
-              marginTop: 28,
-              textAlign: "center",
-              opacity: 0.6,
-              fontWeight: 400,
-            }}
-          >
-            ไม่พบเมนูที่ค้นหา 😅
-          </div>
-        )}
-
-        {/* ===== GRID (auto responsive) ===== */}
-        <div
-          style={{
-            marginTop: 24,
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(430px, 1fr))",
-            gap: 26,
-          }}
-        >
+        {/* ===== GRID ===== */}
+        <div className="grid">
           {filtered.map((m) => (
             <div
               key={m.id}
+              className="card cardOuter"
               style={{
                 background: CARD_BG,
                 border: "3px solid #000",
@@ -212,30 +184,32 @@ export default function MenuPage() {
                 }}
               >
                 <div
+                  className="imgFrame"
                   style={{
-                    border: "3px solid #000",
+                    border: "3px solid #000",   /* ✅ แก้แล้ว */
                     borderRadius: 26,
                     overflow: "hidden",
                     background: "#fff",
-                    height: 320,
                   }}
                 >
-                  <img
-                    src={m.img}
-                    alt={m.name}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      display: "block",
-                    }}
-                  />
+                  <div className="imgBox">
+                    <img
+                      src={m.img}
+                      alt={m.name}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        display: "block",
+                      }}
+                    />
+                  </div>
                 </div>
               </button>
 
               {/* TEXT */}
               <div style={{ marginTop: 18, paddingLeft: 18 }}>
-                <div style={{ fontSize: 18, fontWeight: 400, lineHeight: 1.35 }}>
+                <div style={{ fontSize: 18, fontWeight: 800, lineHeight: 1.35 }}>
                   ชื่อเมนู : {m.name}
                 </div>
 
@@ -274,7 +248,7 @@ export default function MenuPage() {
                 color: "white",
               }}
             >
-              <div style={{ fontWeight: 400, opacity: 0.95 }}>{preview.title}</div>
+              <div style={{ fontWeight: 700, opacity: 0.95 }}>{preview.title}</div>
               <button
                 onClick={() => setPreview(null)}
                 style={{
@@ -282,7 +256,7 @@ export default function MenuPage() {
                   borderRadius: 14,
                   border: "none",
                   background: "#fff",
-                  fontWeight: 400,
+                  fontWeight: 700,
                   cursor: "pointer",
                 }}
               >
