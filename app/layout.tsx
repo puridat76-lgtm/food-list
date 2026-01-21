@@ -9,7 +9,7 @@ const itim = Itim({
 });
 
 export const metadata: Metadata = {
-  title: "Food list",
+  title: "wisawa-salmon-menu",
   description: "Menu view-only",
 };
 
