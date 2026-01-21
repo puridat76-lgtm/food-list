@@ -154,7 +154,7 @@ export default function MenuPage() {
                     borderRadius: 999,
                     border: "2px solid #000",
                     background: active ? "#ffc5a2" : "#fff",
-                    fontWeight: 700,
+                    fontWeight: 400,
                     cursor: "pointer",
                   }}
                 >
@@ -172,7 +172,7 @@ export default function MenuPage() {
               marginTop: 28,
               textAlign: "center",
               opacity: 0.6,
-              fontWeight: 700,
+              fontWeight: 400,
             }}
           >
             ไม่พบเมนูที่ค้นหา 😅
@@ -235,7 +235,7 @@ export default function MenuPage() {
 
               {/* TEXT */}
               <div style={{ marginTop: 18, paddingLeft: 18 }}>
-                <div style={{ fontSize: 18, fontWeight: 700, lineHeight: 1.35 }}>
+                <div style={{ fontSize: 18, fontWeight: 400, lineHeight: 1.35 }}>
                   ชื่อเมนู : {m.name}
                 </div>
 
@@ -274,7 +274,7 @@ export default function MenuPage() {
                 color: "white",
               }}
             >
-              <div style={{ fontWeight: 700, opacity: 0.95 }}>{preview.title}</div>
+              <div style={{ fontWeight: 400, opacity: 0.95 }}>{preview.title}</div>
               <button
                 onClick={() => setPreview(null)}
                 style={{
@@ -282,7 +282,7 @@ export default function MenuPage() {
                   borderRadius: 14,
                   border: "none",
                   background: "#fff",
-                  fontWeight: 700,
+                  fontWeight: 400,
                   cursor: "pointer",
                 }}
               >
