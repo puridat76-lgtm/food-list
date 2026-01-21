@@ -70,7 +70,7 @@ export default function MenuPage() {
           margin-top: 24px;
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-          gap: 26px;
+          gap: 40px;
         }
 
         .card {
@@ -93,9 +93,9 @@ export default function MenuPage() {
 
           .grid {
             grid-template-columns: 1fr !important;
-            gap: 18px !important;
-          }
-
+            row-gap: 50px !important;
+            column-gap: 50px !important;
+            }
           .title {
             font-size: 26px !important;
           }
