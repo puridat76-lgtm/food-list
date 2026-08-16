@@ -48,6 +48,12 @@ export type MenuItem = {
     { id: "37", name: "ซัมยังไก่เผ็ดเทอริยากิลาวา ", price: 129, img: "/images/37.png", category: "ซัมยัง" },
     { id: "38", name: "ซัมยังคาโบนาร่าแซลมอนซาซิมิลาวา", price: 149, img: "/images/38.png", category: "ซัมยัง" },
     { id: "39", name: "ข้าวหน้าสลัดแซลมอนปูอัด", price: 159, img: "/images/39.png", category: "ข้าวญี่ปุ่น" },
+    { id: "51", name: "ซัมยังฮอตโคเรียนแซลมอนไข่กุ้งลาวา", price: 159, img: "/images/51.png", category: "ซัมยัง" },
+    { id: "52", name: "ซัมยังคาโบนาร่าปูอัดลาวา", price: 139, img: "/images/52.png", category: "ซัมยัง" },
+    { id: "54", name: "ซัมยังฮอตโคเรียนแซลมอนปูอัดไข่กุ้งลาวา", price: 169, img: "/images/54.png", category: "ซัมยัง" },
+    { id: "55", name: "ซัมยังคาโบนาร่าปูอัดไข่กุ้งลาวา", price: 149, img: "/images/55.png", category: "ซัมยัง" },
+    { id: "56", name: "ซัมยังคาโบนาร่าไข่กุ้งลาวา", price: 149, img: "/images/56.png", category: "ซัมยัง" },
+    { id: "57", name: "ซัมยังคาโบนาร่าแซลมอนไข่กุ้งลาวา", price: 159, img: "/images/57.png", category: "ซัมยัง" },
     
   ];
   
