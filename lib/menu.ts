@@ -3,7 +3,7 @@ export type MenuItem = {
     name: string;
     price: number;
     img: string;
-    category: "ข้าวญี่ปุ่น" | "มาม่า" | "ซัมยัง" | "เครื่องดื่ม" | "พิเศษ";
+    category: "ข้าวญี่ปุ่น" | "มาม่า" | "ซัมยัง" | "เครื่องดื่ม" | "พิเศษ" | "ซูชิ";
   };
   
   export const MENU: MenuItem[] = [
@@ -54,6 +54,9 @@ export type MenuItem = {
     { id: "55", name: "ซัมยังคาโบนาร่าปูอัดไข่กุ้งลาวา", price: 149, img: "/images/55.png", category: "ซัมยัง" },
     { id: "56", name: "ซัมยังคาโบนาร่าไข่กุ้งลาวา", price: 149, img: "/images/56.png", category: "ซัมยัง" },
     { id: "57", name: "ซัมยังคาโบนาร่าแซลมอนไข่กุ้งลาวา", price: 159, img: "/images/57.png", category: "ซัมยัง" },
-    
+    { id: "58", name: "ซูชิแซลมอนซาซิมิ", price: 99, img: "/images/58.png", category: "ซูชิ" },
+    { id: "59", name: "ซูชิแซลมอนเบิร์นไฟ", price: 99, img: "/images/59.png", category: "ซูชิ" },
+    { id: "60", name: "ซูชิแซลมอนซาซิมิ&เบิร์นไฟ", price: 99, img: "/images/60.png", category: "ซูชิ" },
+    { id: "61", name: "ซูชิแซลมอนไข่กุ้งเบิร์นไฟ", price: 109, img: "/images/61.png", category: "ซูชิ" },
   ];
   

@@ -10,7 +10,7 @@ function money(n: number) {
 const PAGE_BG = "#FFF2D6";
 const CARD_BG = "#FFc5a2";
 
-const CATS = ["ทั้งหมด", "ข้าวญี่ปุ่น", "มาม่า", "ซัมยัง", "เครื่องดื่ม", "พิเศษ"] as const;
+const CATS = ["ทั้งหมด", "ข้าวญี่ปุ่น", "ซูชิ", "มาม่า", "ซัมยัง", "เครื่องดื่ม", "พิเศษ"] as const;
 type Cat = (typeof CATS)[number];
 
 export default function MenuPage() {
